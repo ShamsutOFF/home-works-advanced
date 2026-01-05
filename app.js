@@ -1,19 +1,12 @@
 `use strict`;
 
-const user = {
-    name: "John",
-    birthday: `2012-01-01`
-}
-const user2 = {
-    name: "Francesca",
-    birthday: `2018-05-25`
-}
-
-function checkIs14YearsOld(user) {
-    const userBirthday = new Date(user.birthday).getTime();
-    const earInMs = 365 * 24 * 60 * 60 * 1000;
-    return new Date().getTime() - userBirthday >= 14 * earInMs;
+function checkIs14YearsOld(birthdayString) {
+    const userBirthday = new Date(birthdayString);
+    const today = new Date();
+    return today.getFullYear() - userBirthday.getFullYear() >= 14 &&
+        today.getMonth() >= userBirthday.getMonth() &&
+        today.getDate() >= userBirthday.getDate();
 }
 
-console.log(checkIs14YearsOld(user));
-console.log(checkIs14YearsOld(user2));
+console.log(checkIs14YearsOld(`2012-01-01`));
+console.log(checkIs14YearsOld(`2018-05-25`));

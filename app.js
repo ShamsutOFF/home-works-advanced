@@ -25,6 +25,11 @@ class Orc extends Personage {
             `${this.name} наносит удар ${this.weapon}!`
         );
     }
+    speak() {
+        console.log(
+            `Я могучий Окр ${this.name}, и я говорю на ${this.language}`
+        );
+    }
 }
 
 class Elf extends Personage {
@@ -36,6 +41,11 @@ class Elf extends Personage {
     castSpell() {
         console.log(
             `${this.name} создает заклинание "${this.spellType}"`
+        );
+    }
+    speak() {
+        console.log(
+            `Я великий маг и чародей, гордый Эльф ${this.name}, и я говорю на ${this.language}`
         );
     }
 }

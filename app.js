@@ -1,82 +1,63 @@
 `use strict`;
 
-// class User {
-//     #login;
-//     #_password;
-//
-//     constructor(login, password) {
-//         this.#login = login;
-//         this.#password = password;
-//     }
-//
-//     set #password(pass) {
-//         this.#_password = pass.split('').reverse().join('');
-//     }
-//
-//     get #password() {
-//         return this.#_password.split('').reverse().join('');
-//     }
-//
-//     get login() {
-//         return this.#login;
-//     }
-//
-//     checkPassword(pass) {
-//         return pass === this.#password;
-//     }
-//
-//     changePassword(oldPass, newPass) {
-//         if (this.checkPassword(oldPass)) {
-//             this.#password = newPass;
-//         }
-//     }
-// }
-//
-// user = new User('admin', 'qwerty');
-
-/*
-Создайте класс Car у которого есть марка, модель и пробег (все свойства приватные, задаются в конструкторе).
-
-Сделайте для него возможность менять пробег через get и set.
-Добавьте метод info, который выводит в консоль марку, модели и пробег.
- */
-
-class Car {
-    #brand;
-    #model;
-    #mileage;
-
-    constructor(brand, model, mileage) {
-        this.#brand = brand;
-        this.#model = model;
-        if (mileage > 0) {
-            this.#mileage = mileage;
-        }
+class Personage {
+    constructor(race, name, language) {
+        this.race = race;
+        this.name = name;
+        this.language = language;
     }
 
-    set mileage(mileage) {
-        if (mileage > 0) {
-            this.#mileage = mileage;
-        }
-    }
-
-    get mileage() {
-        if (this.#mileage > 0) {
-            return this.#mileage;
-        }
-    }
-
-    info() {
-        if (this.#mileage > 0) {
-            console.log(`Марка: ${this.#brand}, модель: ${this.#model}, пробег: ${this.#mileage}`);
-        }
+    speak() {
+        console.log(
+            `Я ${this.name}, моя раса: ${this.race}, говорю на ${this.language}`
+        );
     }
 }
 
-// Проверка
-const car = new Car('BMW', 'X5', 10000);
-console.log(car);
-car.info();
-car.mileage = 25000;
-console.log(car.mileage);
-car.info();
+class Orc extends Personage {
+    constructor(name, language, weapon) {
+        super('Орк', name, language);
+        this.weapon = weapon;
+    }
+
+    attack() {
+        console.log(
+            `${this.name} наносит удар ${this.weapon}!`
+        );
+    }
+}
+
+class Elf extends Personage {
+    constructor(name, language, spellType) {
+        super('Эльф', name, language);
+        this.spellType = spellType;
+    }
+
+    castSpell() {
+        console.log(
+            `${this.name} создает заклинание "${this.spellType}"`
+        );
+    }
+}
+
+// Тестируем
+console.log('=== Тест базового персонажа ===');
+const human = new Personage('Человек', 'Артур', 'Общий');
+human.speak();
+
+console.log('\n=== Тест Орка ===');
+const orc = new Orc('Гром', 'Орочий', 'Топор');
+orc.speak();      // Унаследованный метод
+orc.attack();     // Свой метод
+
+console.log('\n=== Тест Эльфа ===');
+const elf = new Elf('Леголас', 'Эльфийский', 'Огненный шар');
+elf.speak();      // Унаследованный метод
+elf.castSpell();  // Свой метод
+
+// Проверяем цепочку прототипов
+console.log('\n=== Проверка наследования ===');
+console.log('Орк наследует от Personage?', orc instanceof Personage); // true
+console.log('Эльф наследует от Personage?', elf instanceof Personage); // true
+console.log('Конструктор Орка:', orc.constructor.name); // Orc
+console.log('Конструктор Эльфа:', elf.constructor.name); // Elf

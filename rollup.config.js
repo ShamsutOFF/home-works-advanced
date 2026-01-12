@@ -1,13 +1,15 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import css from 'rollup-plugin-css-only';
 
 export default {
-    input: 'index.js', // ваш главный файл
+    input: 'src/app.js', // ваш главный файл
     output: {
-        file: 'dist/bundle.min.js',
+        dir: 'dist',
         format: 'iife',
         name: 'App'
     },
     plugins: [
         nodeResolve(),
+        css({ output: 'bundle.css' }),
     ]
 };

@@ -20,10 +20,10 @@ export class CardList extends DivComponent {
         }
         this.el.classList.add('card_list');
         this.el.innerHTML = `<h1>Найдено книг - ${this.parentState.numFound}</h1>`
-        console.log("@@@ ");
-        console.log("@@@ ",this.parentState);
+        // console.log("@@@ ");
+        // console.log("@@@ ",this.parentState);
         for (const card of this.parentState.list) {
-            console.log(card);
+            // console.log(card);
             this.el.append(new Card(this.appState, card).render());
         }
         return this.el;
